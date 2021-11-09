@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+@use './app/styles/colors.component.scss' as *;
+@import "media.css";
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0 auto;
+  background: #F9F9F9;
+  width: 95%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.catalog{
+  display: flex;
+  color: $text-primary;
+}

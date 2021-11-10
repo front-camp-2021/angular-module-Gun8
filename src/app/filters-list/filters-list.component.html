@@ -1,1 +1,6 @@
-<p>filters-list works!</p>
+<div class="filters__item">
+  <h3 class="filters__list-name">{{getTitle()}}</h3>
+  <ul class="filters__list" [class.filters__list_last-child]="isLastChild">
+    <app-filters-list-item *ngFor="let item of filter" [item] = "item"></app-filters-list-item>
+  </ul>
+</div>

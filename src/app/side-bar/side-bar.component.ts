@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import {Filters} from './side-bar';
+import getKeyValue from '../../functions/getKeyValue';
+
 
 @Component({
   selector: 'app-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
+
 export class SideBarComponent implements OnInit {
-  public filters = {
+
+  public filters : Filters = {
     category:
       [
         {
@@ -50,8 +55,17 @@ export class SideBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getObjFields(obj: object){
-    return Object.keys(obj);
+  getFiltersKeys(obj: Filters){
+    return Object.keys(obj).map(key => {
+      return <keyof Filters>key
+    });
   }
 
+  getFilterValue(field: keyof Filters){
+    return getKeyValue<keyof Filters, Filters>(field)(this.filters);
+  }
+
+  isLastChild(i: number){
+    return i === Object.entries(this.filters).length - 1
+  }
 }

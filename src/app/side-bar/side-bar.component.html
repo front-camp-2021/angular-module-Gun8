@@ -6,7 +6,12 @@
     </button>
   </div>
   <div class="filters__content">
-      <div *ngFor="let field of getObjFields(filters)">{{field}}</div>
+      <app-filters-list *ngFor="let key of getFiltersKeys(filters); index as i"
+                        [filter] = "getFilterValue(key)"
+                        [isLastChild] = "isLastChild(i)"
+      >
+
+      </app-filters-list>
   </div>
   <button class="filters__reset-btn" data-element="btn">Clear all filters</button>
 </aside>

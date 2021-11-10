@@ -1,0 +1,12 @@
+<aside class="filters">
+  <div class="filters__header">
+    <h2 class="filters__name">Filters</h2>
+    <button class="filters__hide-btn">
+      <img src="assets/img/chevrons-left.svg" alt="hide">
+    </button>
+  </div>
+  <div class="filters__content">
+      <div *ngFor="let field of getObjFields(filters)">{{field}}</div>
+  </div>
+  <button class="filters__reset-btn" data-element="btn">Clear all filters</button>
+</aside>

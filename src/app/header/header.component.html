@@ -5,9 +5,9 @@
   </div>
   <ul class="breadcrumb">
     <li class="breadcrumb__item"><a href="#"><img src="assets/img/home.svg" alt="home"></a></li>
-    <ng-template ngFor let-page [ngForOf]="getPageHistoryWithoutCurrent()">
+    <ng-template ngFor let-page [ngForOf]="pagesHistory | slice:0:pagesHistory.length-1">
       <li class="breadcrumb__item"><a href="#">{{page}}</a></li>
     </ng-template>
-    <li class="breadcrumb__item breadcrumb__item_cur-page"><a href="#">{{getCurrentPage()}}</a></li>
+    <li class="breadcrumb__item breadcrumb__item_cur-page"><a href="#">{{pagesHistory[pagesHistory.length-1]}}</a></li>
   </ul>
 </header>

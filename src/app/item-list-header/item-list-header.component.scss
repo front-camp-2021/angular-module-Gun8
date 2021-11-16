@@ -1,0 +1,19 @@
+@import '../styles/utils.component.scss';
+@import '../styles/colors.component.scss';
+
+.item-list-header{
+  @extend %vertical-align;
+  justify-content: space-between;
+
+  &__counter{
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  &__like-btn{
+    @extend %btn-pre-setting;
+    @extend %shadowed-box;
+    background: $bg-primary;
+    padding: 0.813rem 1rem 0.625rem;
+  }
+}

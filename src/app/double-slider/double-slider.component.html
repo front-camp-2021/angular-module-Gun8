@@ -1,0 +1,31 @@
+<div class="filters__item">
+  <h3 class="filters__list-name">{{slider.filterName}}</h3>
+  <div class="filters__list">
+    <div class="range-slider">
+      <span data-element="from" #from>{{slider.formatValue(slider.selected.from)}}</span>
+      <div class="range-slider__inner" data-element="slider" #doubleSlider>
+         <span
+           class="range-slider__progress"
+           data-element="progress"
+           #progress
+         >
+         </span>
+        <span
+          class="range-slider__thumb-left"
+          data-element="thumbLeft"
+          (mousedown)="onMouseDown($event)"
+          #thumbLeft>
+          <!---->
+        </span>
+        <span
+          class="range-slider__thumb-right"
+          data-element="thumbRight"
+          (mousedown)="onMouseDown($event)"
+          #thumbRight
+        >
+        </span>
+      </div>
+      <span data-element="to" #to>{{slider.formatValue(slider.selected.to)}}</span>
+    </div>
+  </div>
+</div>

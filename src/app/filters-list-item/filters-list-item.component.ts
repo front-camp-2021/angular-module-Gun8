@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {filterField} from '../side-bar/side-bar';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {FilterField} from '../side-bar/side-bar';
 
 @Component({
   selector: 'app-filters-list-item',
@@ -7,22 +7,25 @@ import {filterField} from '../side-bar/side-bar';
   styleUrls: ['./filters-list-item.component.scss']
 })
 export class FiltersListItemComponent implements OnInit {
-  @Input() public item : filterField = {value: '', title: ''};
-  public checked = false;
+  @Input() public filterItem : FilterField  = {value: '', title: '', checked: false};
+  @Output() filterItemChange : EventEmitter<FilterField> = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
   getFilterName(){
-    return this.item.value.split("=")[0];
+    return this.filterItem.value.split("=")[0];
   }
 
   getItemName(){
-    return this.item.value.split("=")[1];
+    return this.filterItem.value.split("=")[1];
   }
 
-  onChange(){
-    this.checked = !this.checked;
+  onFilterItemChange(){
+    this.filterItemChange.emit({
+      ...this.filterItem,
+      checked: !this.filterItem.checked
+    });
   }
 }

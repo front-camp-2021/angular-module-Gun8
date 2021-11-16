@@ -1,14 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {filterField} from '../side-bar/side-bar';
+import {Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
+import {FilterField} from '../side-bar/side-bar';
 
 @Component({
   selector: 'app-filters-list',
   templateUrl: './filters-list.component.html',
   styleUrls: ['./filters-list.component.scss']
 })
+
 export class FiltersListComponent implements OnInit {
-  @Input() public filter : Array<filterField> = [];
+  @Input() public filter : FilterField[] = [];
   @Input() public isLastChild : boolean = false;
+  @Output() filterChange = new EventEmitter<FilterField[]>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -19,4 +22,9 @@ export class FiltersListComponent implements OnInit {
     return title.charAt(0).toUpperCase() + title.slice(1);
   }
 
+  onFilterChange(item: FilterField){
+    this.filterChange.emit(
+      this.filter.map(filterItem => item.title === filterItem.title ? item : filterItem)
+    );
+  }
 }

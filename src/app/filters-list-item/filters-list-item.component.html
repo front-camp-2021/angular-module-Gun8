@@ -3,10 +3,10 @@
          [value]="getItemName()"
          [name]="getFilterName()"
          [id]="getItemName()"
-         (change)="onChange()">
+         (change)="onFilterItemChange()">
     <label [for]="getItemName()">
-    <span class="filters__checkbox" [class.filters__checkbox_checked]="checked">
+    <span class="filters__checkbox" [class.filters__checkbox_checked]="filterItem.checked">
     </span>
-    <span class="filters__val">{{item.title}}</span>
+    <span class="filters__val">{{filterItem.title}}</span>
   </label>
 </li>

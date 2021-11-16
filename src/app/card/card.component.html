@@ -1,0 +1,24 @@
+<div class="item" id="id">
+  <div class="item__img" [ngStyle]="bgImage"></div>
+    <div class="item__inform">
+      <div class="item__rating">
+        <span>{{product.rating}}</span>
+        <img src="assets/img/star.svg" alt="star" />
+      </div>
+      <div class="item__price">{{product.price + ' UAH'}}</div>
+    </div>
+    <div class="item__description">
+      <h2>{{product.title}}</h2>
+      <p>{{product.brand}}</p>
+    </div>
+    <div class="item__buttons">
+      <button #wishListButton>
+        <img src="assets/img/black-heart.svg" alt="like" />
+        wishlist
+      </button>
+      <button>
+        <img src="assets/img/shopping-bag.png" alt="like" />
+        add to cart
+      </button>
+    </div>
+</div>

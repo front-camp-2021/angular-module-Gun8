@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  public pagination = {
+    currentPage: 1,
+    totalPages: 10,
+    pageLimit: 12
+  };
 
+  changePage(num: number){
+    this.pagination = {
+      ...this.pagination,
+      currentPage: num
+    }
+  }
 }

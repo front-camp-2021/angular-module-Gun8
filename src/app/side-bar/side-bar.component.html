@@ -6,12 +6,24 @@
     </button>
   </div>
   <div class="filters__content">
-      <app-filters-list *ngFor="let key of getFiltersKeys(filters); index as i"
-                        [filter] = "getFilterValue(key)"
-                        [isLastChild] = "isLastChild(i)"
-      >
+        <app-double-slider *ngFor="let item of sliders | keyvalue"
+                           [slider] = "item.value"
+                           (sliderChange) = "onSliderChange($event)"
+        >
 
-      </app-filters-list>
+        </app-double-slider>
+        <app-filters-list *ngFor="let item of filters | keyvalue; index as i"
+                          [filter] = "item.value"
+                          [isLastChild] = "isLastChild(i)"
+                          (filterChange) = "onFilterChange($event)"
+                          >
+
+        </app-filters-list>
   </div>
-  <button class="filters__reset-btn" data-element="btn">Clear all filters</button>
+  <button class="filters__reset-btn"
+          data-element="btn"
+          (click)="reset()"
+  >
+    Clear all filters
+  </button>
 </aside>

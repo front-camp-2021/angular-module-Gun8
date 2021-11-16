@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Filters, Sliders, Slider, FilterField} from './side-bar';
+import {Filters, FilterField} from "../../interfaces/filters-interfaces";
+import {Sliders, Slider} from '../../interfaces/sliders-interfaces';
 
 @Component({
   selector: 'app-side-bar',

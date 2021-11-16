@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output,EventEmitter} from '@angular/core';
-import {FilterField} from '../side-bar/side-bar';
+import {FilterField} from '../../interfaces/filters-interfaces';
 
 @Component({
   selector: 'app-filters-list',

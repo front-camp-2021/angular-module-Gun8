@@ -1,7 +1,7 @@
 import {Component, OnInit, AfterViewInit, Input, ElementRef,
   ViewChildren, QueryList, Output, EventEmitter} from '@angular/core';
-import {Slider} from '../side-bar/side-bar';
-import {SliderElements} from './double-slider';
+import {Slider} from '../../interfaces/sliders-interfaces';
+import {SliderElements} from '../../interfaces/slider-elements-interface';
 
 
 @Component({

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, OnChanges} from '@angular/core';
 import {Filters, FilterField} from "../../interfaces/filters-interfaces";
 import {Sliders, Slider} from '../../interfaces/sliders-interfaces';
+import {Product} from "../../interfaces/product-interface";
+import {AppService} from "../app.service";
 
 @Component({
   selector: 'app-side-bar',
@@ -8,78 +10,72 @@ import {Sliders, Slider} from '../../interfaces/sliders-interfaces';
   styleUrls: ['./side-bar.component.scss']
 })
 
-export class SideBarComponent implements OnInit {
+export class SideBarComponent implements OnInit, OnChanges {
 
   public filters : Filters = {
-    category:
-      [
-        {
-          value: 'category=cell_phones',
-          title: 'Cell Phones',
-          checked: false
-        },
-        {
-          value: 'category=computer_tablets',
-          title: 'Computers & Tablets',
-          checked: false
-        },
-        {
-          value: 'category=cell_phones_accessories',
-          title: 'Cell Phone Accessories',
-          checked: false
-        },
-        {
-          value: 'category=appliances',
-          title: 'Appliances',
-          checked: false
-        },
-        {
-          value: 'category=audio',
-          title: 'Audio',
-          checked: false
-        },
-      ],
-      brand: [
-        {
-          value: 'brand=insigni',
-          title: 'Insigni',
-          checked: false
-        },
-        {
-          value: 'brand=samsung',
-          title: 'Samsung',
-          checked: false
-        },
-        {
-          value: 'brand=apple',
-          title: 'Apple',
-          checked: false
-
-        },
-      ]
+    category: [],
+    brand: []
   };
 
-  public sliders : Sliders = {
-    price: {
-      min: 53,
-      max: 83000,
-      formatValue: (value) => value + '₴',
-      selected: {
-        from: 53,
-        to: 83000
-      },
-      precision: 0,
-      filterName: 'Price'
+  public sliders!: Sliders;
+
+  @Input() products!: Product[];
+
+  constructor(private service : AppService) { }
+
+  ngOnChanges(){
+    const prices = this.products.map(product => product.price);
+
+    this.sliders = {
+      price: {
+        min: Math.min(...prices),
+        max: Math.max(...prices),
+        formatValue: value => value + '₴',
+        selected: {
+          from: Math.min(...prices),
+          to: Math.max(...prices),
+        },
+        precision: 0,
+        filterName: 'Price'
+      }
     }
-  };
-  constructor() { }
+  }
 
   ngOnInit(): void {
+    this.service.getCategories()
+      .subscribe(data => this.changeCategories(data));
+
+    this.service.getBrands()
+      .subscribe(data => this.changeBrands(data));
   }
 
-  isLastChild(i: number){
-    return i === Object.entries(this.filters).length - 1;
+  changeCategories(data: string[]){
+    const categories = this.prepareFilters(data, 'categories');
+
+    this.filters = {
+      ...this.filters,
+      category: categories
+    }
   }
+
+  changeBrands(data: string[]){
+    const brands = this.prepareFilters(data, 'brands');
+
+    this.filters = {
+      ...this.filters,
+      brand: brands
+    }
+  }
+
+  prepareFilters(arr : string[], prefix: string){
+    return arr.map(item => {
+      return {
+        value: `${prefix}=` + item.toLowerCase().split(' ').join('_'),
+        title: item,
+        checked: false
+      }
+    });
+  };
 
   reset(){
     const thumbLeft = document.querySelectorAll('.range-slider__thumb-left');

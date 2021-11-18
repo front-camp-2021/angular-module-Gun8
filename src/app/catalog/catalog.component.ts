@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import Pagination from '../../interfaces/pagination-interface';
+import {Product} from "../../interfaces/product-interface";
 
 @Component({
   selector: 'app-catalog',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent implements OnInit {
+  @Input() pagination!: Pagination;
+  @Input() products!: Product[];
 
   constructor() { }
 

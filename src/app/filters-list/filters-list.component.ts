@@ -9,7 +9,6 @@ import {FilterField} from '../../interfaces/filters-interfaces';
 
 export class FiltersListComponent implements OnInit {
   @Input() public filter : FilterField[] = [];
-  @Input() public isLastChild : boolean = false;
   @Output() filterChange = new EventEmitter<FilterField[]>();
 
   constructor() { }
@@ -18,6 +17,8 @@ export class FiltersListComponent implements OnInit {
   }
 
   getTitle(){
+    if(this.filter.length === 0) return '';
+
     const title = this.filter[0].value.split("=")[0];
     return title.charAt(0).toUpperCase() + title.slice(1);
   }

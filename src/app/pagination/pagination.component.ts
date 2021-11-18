@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewInit, EventEmitter, Output} from '@angular/core';
+import {Component, Input, OnInit, OnChanges, EventEmitter, Output} from '@angular/core';
 import Pagination from "../../interfaces/pagination-interface";
 
 @Component({
@@ -6,7 +6,7 @@ import Pagination from "../../interfaces/pagination-interface";
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit, AfterViewInit {
+export class PaginationComponent implements OnInit, OnChanges {
   @Input() pagination!: Pagination;
   @Output() changePage = new EventEmitter<number>();
   public pages: number[] = [];
@@ -16,7 +16,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
   }
 
-  ngAfterViewInit(){
+  ngOnChanges(){
     this.pages = Array(this.pagination.totalPages).fill(0).map((x,i)=>i+1);
   }
 

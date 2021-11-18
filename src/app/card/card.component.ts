@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewInit} from '@angular/core';
+import {Component, Input, OnInit, OnChanges} from '@angular/core';
 import {Product} from "../../interfaces/product-interface";
 
 @Component({
@@ -6,21 +6,19 @@ import {Product} from "../../interfaces/product-interface";
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit, AfterViewInit {
+export class CardComponent implements OnInit, OnChanges {
   @Input() product!: Product;
   public bgImage = {
     backgroundImage: ''
   };
 
-
-
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void{
+    this.bgImage.backgroundImage = `url(${this.product.images[0]})`;
   }
 
-  ngAfterViewInit(): void{
-    this.bgImage.backgroundImage = `url(${this.product.images[0]})`;
+  ngOnInit(): void {
   }
 
 }

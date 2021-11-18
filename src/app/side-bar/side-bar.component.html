@@ -14,7 +14,6 @@
         </app-double-slider>
         <app-filters-list *ngFor="let item of filters | keyvalue; index as i"
                           [filter] = "item.value"
-                          [isLastChild] = "isLastChild(i)"
                           (filterChange) = "onFilterChange($event)"
                           >
 

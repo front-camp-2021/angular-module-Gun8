@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import Pagination from '../../interfaces/pagination-interface';
 import {Product} from "../../interfaces/product-interface";
+import {FilteredBy} from "../../interfaces/filtered-by-interface";
 
 @Component({
   selector: 'app-catalog',
@@ -9,11 +10,18 @@ import {Product} from "../../interfaces/product-interface";
 })
 export class CatalogComponent implements OnInit {
   @Input() pagination!: Pagination;
-  @Input() products!: Product[];
+  @Input() filteredProducts!: Product[];
+  @Input() filteredBy!: FilteredBy;
+
+  @Output() changeFilteredBy = new EventEmitter<FilteredBy>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  handleFilterChanges(event: FilteredBy){
+    this.changeFilteredBy.emit(event);
   }
 
 }

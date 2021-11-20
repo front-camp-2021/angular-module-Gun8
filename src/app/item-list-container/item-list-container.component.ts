@@ -11,7 +11,7 @@ import Pagination from "../../interfaces/pagination-interface";
 
 export class ItemListContainerComponent implements OnInit {
   @Input() pagination!: Pagination;
-  @Input() products: Product[] = [];
+  @Input() filteredProducts: Product[] = [];
   public pageLimit = 12;
 
   constructor() {}
@@ -21,7 +21,7 @@ export class ItemListContainerComponent implements OnInit {
 
   getSlicedProducts(){
     const pageIndex = this.pagination.currentPage - 1;
-    const products = [...this.products];
+    const products = [...this.filteredProducts];
 
     return products.slice(pageIndex * this.pageLimit, this.pagination.currentPage * this.pageLimit);
   }

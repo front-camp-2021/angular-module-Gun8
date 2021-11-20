@@ -1,7 +1,11 @@
 <section class="catalog" data-element="catalog">
-  <app-side-bar [products] = "products"></app-side-bar>
+  <app-side-bar
+    [filteredProducts] = "filteredProducts"
+    [filteredBy] = "filteredBy"
+    (changeFilteredBy)="handleFilterChanges($event)"
+  ></app-side-bar>
   <app-item-list-container
     [pagination] = "pagination"
-    [products] = "products"
+    [filteredProducts] = "filteredProducts"
   ></app-item-list-container>
 </section>

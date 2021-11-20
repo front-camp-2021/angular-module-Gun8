@@ -23,9 +23,9 @@ export class FiltersListComponent implements OnInit {
     return title.charAt(0).toUpperCase() + title.slice(1);
   }
 
-  onFilterChange(item: FilterField){
+  onFilterChange(changedItem: FilterField){
     this.filterChange.emit(
-      this.filter.map(filterItem => item.title === filterItem.title ? item : filterItem)
+      this.filter.map(curFilterItem => changedItem.title === curFilterItem.title ? changedItem : curFilterItem)
     );
   }
 }

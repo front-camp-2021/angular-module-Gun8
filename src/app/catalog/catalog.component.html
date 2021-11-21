@@ -7,5 +7,7 @@
   <app-item-list-container
     [pagination] = "pagination"
     [filteredProducts] = "filteredProducts"
+    [filteredBy] = "filteredBy"
+    (changeFilteredBy)="handleFilterChanges($event)"
   ></app-item-list-container>
 </section>

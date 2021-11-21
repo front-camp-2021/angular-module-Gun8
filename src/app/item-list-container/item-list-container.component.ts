@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {AppService} from '../app.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Product} from "../../interfaces/product-interface";
 import Pagination from "../../interfaces/pagination-interface";
+import {FilteredBy} from "../../interfaces/filtered-by-interface";
 
 @Component({
   selector: 'app-item-list-container',
@@ -12,7 +12,8 @@ import Pagination from "../../interfaces/pagination-interface";
 export class ItemListContainerComponent implements OnInit {
   @Input() pagination!: Pagination;
   @Input() filteredProducts: Product[] = [];
-  public pageLimit = 12;
+  @Input() filteredBy!: FilteredBy;
+  @Output() changeFilteredBy = new EventEmitter<FilteredBy>();
 
   constructor() {}
 
@@ -23,7 +24,11 @@ export class ItemListContainerComponent implements OnInit {
     const pageIndex = this.pagination.currentPage - 1;
     const products = [...this.filteredProducts];
 
-    return products.slice(pageIndex * this.pageLimit, this.pagination.currentPage * this.pageLimit);
+    return products.slice(pageIndex * this.pagination.pageLimit, this.pagination.currentPage * this.pagination.pageLimit);
+  }
+
+  handleFilterChanges(event: FilteredBy){
+    this.changeFilteredBy.emit({...event});
   }
 
 }

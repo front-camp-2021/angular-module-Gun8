@@ -21,7 +21,7 @@ export class CatalogComponent implements OnInit {
   }
 
   handleFilterChanges(event: FilteredBy){
-    this.changeFilteredBy.emit(event);
+    this.changeFilteredBy.emit({...event});
   }
 
 }

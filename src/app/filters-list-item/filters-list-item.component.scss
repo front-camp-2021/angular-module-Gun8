@@ -1,0 +1,38 @@
+@import '../styles/colors.component.scss';
+@import '../styles/utils.component.scss';
+
+%input-img-setting{
+  display: inline-block;
+  margin-right: 0.75rem;
+}
+
+
+.filters{
+
+  &__list-item{
+      @extend %vertical-align;
+      justify-content: space-between;
+      margin-bottom: 1.125rem;
+
+      input{
+        display: none;
+      }
+
+      label{
+        @extend %vertical-align;
+      }
+  }
+
+  &__checkbox{
+    @extend %input-img-setting;
+    @include bg-img-centered("/assets/img/square.svg",1.313rem,1.125rem);
+
+    &_checked{
+      background-image: url("/assets/img/active-square.svg");
+    }
+  }
+
+  &__val{
+    cursor: text;
+  }
+}

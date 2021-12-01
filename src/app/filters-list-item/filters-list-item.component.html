@@ -1,0 +1,12 @@
+<li class="filters__list-item">
+  <input type="checkbox"
+         [value]="getItemName()"
+         [name]="getFilterName()"
+         [id]="getItemName()"
+         (change)="onFilterItemChange()">
+    <label [for]="getItemName()">
+    <span class="filters__checkbox" [class.filters__checkbox_checked]="filterItem.checked">
+    </span>
+    <span class="filters__val">{{filterItem.title}}</span>
+  </label>
+</li>

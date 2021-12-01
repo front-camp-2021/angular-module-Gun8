@@ -1,0 +1,36 @@
+
+.item-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+app-card{
+  width: 32%;
+  margin-right: 2%;
+  min-width: 21.5rem;
+  margin-top: 1.75rem;
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 1238px){
+  *{
+    font-size: 14px;
+  }
+  app-card{
+    width: 49%;
+  }
+  app-card:nth-child(6n + 3){
+    margin-right: 2%;
+  }
+  app-card:nth-child(2n){
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 461px) {
+  app-card {
+    width: 100%;
+  }
+}

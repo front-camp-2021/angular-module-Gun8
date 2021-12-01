@@ -1,0 +1,22 @@
+app-side-bar{
+  min-width: 22rem;
+  width: 30%;
+}
+
+app-item-list-container{
+  margin-left: 2rem;
+  width: 70%;
+}
+
+@media screen and (max-width: 857px){
+  app-side-bar{
+    display: none;
+  }
+
+  app-item-list-container{
+    margin-left: 0;
+    width: 100%;
+  }
+
+}
+

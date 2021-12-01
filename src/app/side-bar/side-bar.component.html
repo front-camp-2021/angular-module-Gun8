@@ -1,0 +1,28 @@
+<aside class="filters">
+  <div class="filters__header">
+    <h2 class="filters__name">Filters</h2>
+    <button class="filters__hide-btn">
+      <img src="assets/img/chevrons-left.svg" alt="hide">
+    </button>
+  </div>
+  <div class="filters__content">
+        <app-double-slider *ngFor="let item of sliders | keyvalue"
+                           [slider] = "item.value"
+                           (sliderChange) = "onSliderChange($event)"
+        >
+
+        </app-double-slider>
+        <app-filters-list *ngFor="let item of filters | keyvalue; index as i"
+                          [filter] = "item.value"
+                          (filterChange) = "onFilterChange($event)"
+                          >
+
+        </app-filters-list>
+  </div>
+  <button class="filters__reset-btn"
+          data-element="btn"
+          (click)="reset()"
+  >
+    Clear all filters
+  </button>
+</aside>

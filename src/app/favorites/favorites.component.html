@@ -1,0 +1,4 @@
+<app-header></app-header>
+<button class="wish-list__btn" (click)="clearWishList()">CLEAR ALL ITEMS</button>
+<app-card-list [products]="getSlicedProducts(pagination$ | async)"></app-card-list>
+<app-pagination [pagination] = "pagination$ | async" (changePage)="changePage($event)"></app-pagination>

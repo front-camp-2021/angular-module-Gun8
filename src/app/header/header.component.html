@@ -1,0 +1,13 @@
+<header class="header">
+  <div class="logo">
+    <img class="logo__img" src="assets/img/logo.png" alt="logo">
+    <h1 class="logo__name">Online Store</h1>
+  </div>
+  <ul class="breadcrumb">
+    <li class="breadcrumb__item"><a routerLink="/products"><img src="assets/img/home.svg" alt="home"></a></li>
+    <ng-template ngFor let-page [ngForOf]="pagesHistory | slice:0:pagesHistory.length-1">
+      <li class="breadcrumb__item"><a href="#">{{page}}</a></li>
+    </ng-template>
+    <li class="breadcrumb__item breadcrumb__item_cur-page"><a href="#">{{pagesHistory[pagesHistory.length-1]}}</a></li>
+  </ul>
+</header>

@@ -1,0 +1,44 @@
+@import '../styles/colors.component.scss';
+@import '../styles/utils.component.scss';
+
+
+
+.filters{
+
+  &__header{
+    @extend %vertical-align;
+    justify-content: space-between;
+  }
+
+  &__name{
+    color: $text-primary;
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 400;
+  }
+
+  &__hide-btn{
+    @extend %btn-pre-setting;
+    @extend %shadowed-box;
+    padding: 0.75rem 1rem;
+  }
+
+  &__content{
+    @extend %shadowed-box;
+    margin-top: 1rem;
+    padding-top: 1.188rem;
+    //height: calc(100% - 6.625rem - 1.75rem - 2px);
+  }
+
+  &__reset-btn{
+    @extend %btn-pre-setting;
+    @extend %shadowed-box;
+    background: $bg-primary;
+    color: #FFFFFF;
+    width: 100%;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    cursor: pointer;
+  }
+}

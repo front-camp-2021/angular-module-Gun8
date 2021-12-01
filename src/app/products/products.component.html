@@ -1,0 +1,10 @@
+<app-header></app-header>
+<app-catalog [pagination] = "pagination$ | async"
+             [filteredProducts] = "filteredProducts"
+             [filteredBy] = "filteredBy"
+             (changeFilteredBy)="handleFilterChanges($event)"
+
+>
+
+</app-catalog>
+<app-pagination [pagination] = "pagination$ | async" (changePage)="changePage($event)"></app-pagination>

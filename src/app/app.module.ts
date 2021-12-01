@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule} from "@angular/common/http";
+import { StoreModule } from '@ngrx/store';
 
-import { AppRoutingModule } from './app-routing.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+
+import {productsReducer} from "../store/products/products.reducer";
+import {wishListReducer} from "../store/wishlist/wishlist.reducer";
+import {paginationReducer} from "../store/pagination/pagination.reducer";
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
@@ -18,6 +25,9 @@ import { CardComponent } from './card/card.component';
 import { PaginationComponent } from './pagination/pagination.component';
 
 import {AppService} from "./app.service";
+import { AppRoutingModule } from './app-routing.module';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -33,12 +43,24 @@ import {AppService} from "./app.service";
     SearchComponent,
     CardListComponent,
     CardComponent,
-    PaginationComponent
+    PaginationComponent,
+    FavoritesComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({
+      products: productsReducer,
+      wishList: wishListReducer,
+      pagination: paginationReducer
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+      autoPause: true,
+    }),
   ],
   providers: [AppService],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@ import {FilteredBy} from "../../interfaces/filtered-by-interface";
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent implements OnInit {
-  @Input() pagination!: Pagination;
+  @Input() pagination!: Pagination | null;
   @Input() filteredProducts!: Product[];
   @Input() filteredBy!: FilteredBy;
 

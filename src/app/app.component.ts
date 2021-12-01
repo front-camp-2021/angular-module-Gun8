@@ -1,82 +1,23 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import {Product} from "../interfaces/product-interface";
+import { Component, OnInit} from '@angular/core';
 import {AppService} from "./app.service";
-import {FilteredBy} from "../interfaces/filtered-by-interface";
+import { Store } from '@ngrx/store';
+import {retrievedProducts} from "../store/products/products.actions";
+import {selectProducts} from "../store/products/products.selectors";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnChanges{
-  public products: Product[] = [];
-  public filteredProducts: Product[] = [];
-  public pagination = {
-    currentPage: 1,
-    totalPages: 10,
-    pageLimit: 12
-  };
+export class AppComponent implements OnInit{
+  products$ = this.store.select(selectProducts);
 
-  public filteredBy: FilteredBy = {
-    filters: [],
-    sliders: [],
-    search: []
-  };
-
-  constructor(private service : AppService) {}
-
-  ngOnChanges(){
-    console.log(this.filteredBy);
-  }
+  constructor(private service: AppService, private store: Store) {}
 
   ngOnInit(){
-    this.service.getProducts()
-      .subscribe(data => this.handleProducts(data));
-
+    this.service
+      .getProducts()
+      .subscribe(products => this.store.dispatch(retrievedProducts({products})))
   }
 
-  handleProducts(data: Product[]){
-    this.products = this.filteredProducts = data;
-
-    this.filteredBy = {
-      filters: this.products,
-      sliders: this.products,
-      search: this.products
-    };
-
-    this.changeNumOfPages();
-  }
-
-  changePage(num: number){
-    this.pagination = {
-      ...this.pagination,
-      currentPage: num
-    }
-  }
-
-  changeNumOfPages(){
-    this.pagination = {
-      ...this.pagination,
-      totalPages: Math.ceil(this.filteredProducts.length / this.pagination.pageLimit),
-      currentPage: 1
-    };
-  }
-
-  handleFilterChanges(event: FilteredBy){
-    this.filteredBy = {
-      ...event
-    };
-
-    this.filteredProducts = this.products.filter(product =>
-      this.getProductsIdArray(this.filteredBy.filters).includes(product.id) &&
-      this.getProductsIdArray(this.filteredBy.sliders).includes(product.id) &&
-      this.getProductsIdArray(this.filteredBy.search).includes(product.id)
-    );
-
-    this.changeNumOfPages();
-  }
-
-  getProductsIdArray(products: Product[]){
-    return products.map(product => product.id);
-  }
 }

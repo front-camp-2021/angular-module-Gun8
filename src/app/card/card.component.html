@@ -12,10 +12,19 @@
       <p>{{product.brand}}</p>
     </div>
     <div class="item__buttons">
-      <button #wishListButton>
-        <img src="assets/img/black-heart.svg" alt="like" />
-        wishlist
-      </button>
+      <div *ngIf="addedToWishList; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <button #wishListButton (click)="toggleWishList()">
+          <img src="assets/img/red-heart.svg" alt="like" />
+          wishlist
+        </button>
+      </ng-template>
+      <ng-template #elseBlock>
+        <button #wishListButton (click)="toggleWishList()">
+          <img src="assets/img/black-heart.svg" alt="like" />
+          wishlist
+        </button>
+      </ng-template>
       <button>
         <img src="assets/img/shopping-bag.png" alt="like" />
         add to cart

@@ -1,3 +1,8 @@
 <div class="item-list" data-element="cards">
-    <app-card *ngFor="let item of products" [product] = "item"></app-card>
+    <app-card
+      *ngFor="let item of products"
+      [product] = "item"
+      (toggleWishListEvent)="toggleWishList($event)"
+      [addedToWishList] = "isAddedToWishList(item)"
+    ></app-card>
 </div>

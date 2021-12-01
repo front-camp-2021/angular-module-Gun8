@@ -10,7 +10,7 @@ import {FilteredBy} from "../../interfaces/filtered-by-interface";
 })
 
 export class ItemListContainerComponent implements OnInit {
-  @Input() pagination!: Pagination;
+  @Input() pagination!: Pagination | null;
   @Input() filteredProducts: Product[] = [];
   @Input() filteredBy!: FilteredBy;
   @Output() changeFilteredBy = new EventEmitter<FilteredBy>();
@@ -21,6 +21,8 @@ export class ItemListContainerComponent implements OnInit {
   }
 
   getSlicedProducts(){
+    if(!this.pagination) return null;
+
     const pageIndex = this.pagination.currentPage - 1;
     const products = [...this.filteredProducts];
 

@@ -1,5 +1,5 @@
 <div class="item-list-container" data-element="container">
-  <app-item-list-header></app-item-list-header>
+  <app-item-list-header [numOfResults] = "filteredProducts.length"></app-item-list-header>
   <app-search [filteredBy] = "filteredBy"
               (changeFilteredBy)="handleFilterChanges($event)"
   ></app-search>

@@ -1,9 +1,9 @@
-<footer class="pagination">
+<footer class="pagination" [style.display] = "display">
   <button (click)="toPrevPage()" class="pagination__prev" data-testid = "prev" data-element="prev"></button>
   <ul class="pagination__list" data-element="list">
     <li *ngFor="let page of pages"
         class="pagination__page-item"
-        [class.pagination__page-item_active] = "page === pagination.currentPage"
+        [class.pagination__page-item_active] = "page === pagination?.currentPage"
         (click)="toPage(page)"
     >
       {{page}}

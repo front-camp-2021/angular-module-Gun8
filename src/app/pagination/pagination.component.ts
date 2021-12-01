@@ -7,20 +7,34 @@ import Pagination from "../../interfaces/pagination-interface";
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Input() pagination!: Pagination;
+  @Input() pagination!: Pagination | null;
   @Output() changePage = new EventEmitter<number>();
   public pages: number[] = [];
+  public display = "flex";
 
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   ngOnChanges(){
+    if(!this.pagination) return;
+
+    if(this.pagination?.totalPages === 0){
+      this.display = "none";
+    }
+    else{
+      this.display = "flex";
+    }
+
+
     this.pages = Array(this.pagination.totalPages).fill(0).map((x,i)=>i+1);
   }
 
   toPrevPage(){
+    if(!this.pagination) return;
+
     if(this.pagination.currentPage > 1){
       window.scrollTo(0, 0);
       this.changePage.emit(this.pagination.currentPage - 1);
@@ -28,6 +42,8 @@ export class PaginationComponent implements OnInit, OnChanges {
   };
 
   toNextPage(){
+    if(!this.pagination) return;
+
     if(this.pagination.currentPage < this.pagination.totalPages){
       window.scrollTo(0, 0);
       this.changePage.emit(this.pagination.currentPage + 1);
@@ -35,6 +51,8 @@ export class PaginationComponent implements OnInit, OnChanges {
   };
 
   toPage(num: number){
+    if(!this.pagination) return;
+
     if(num !== this.pagination.currentPage){
       window.scrollTo(0, 0);
       this.changePage.emit(num);

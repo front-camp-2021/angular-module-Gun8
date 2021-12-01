@@ -4,7 +4,7 @@
     <h1 class="logo__name">Online Store</h1>
   </div>
   <ul class="breadcrumb">
-    <li class="breadcrumb__item"><a href="#"><img src="assets/img/home.svg" alt="home"></a></li>
+    <li class="breadcrumb__item"><a routerLink="/products"><img src="assets/img/home.svg" alt="home"></a></li>
     <ng-template ngFor let-page [ngForOf]="pagesHistory | slice:0:pagesHistory.length-1">
       <li class="breadcrumb__item"><a href="#">{{page}}</a></li>
     </ng-template>
